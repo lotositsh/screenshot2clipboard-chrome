@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Shot to ImgBB options</title>
+<style>
+  body { font: 14px sans-serif; margin: 20px; max-width: 480px; }
+  fieldset { margin: 12px 0; padding: 10px 14px; }
+  label { display: block; margin: 6px 0; }
+  input[type=text] { width: 100%; box-sizing: border-box; }
+  fieldset:disabled { opacity: 0.5; }
+  #msg { color: #070; }
+</style>
+</head>
+<body>
+  <h2>Shot to ImgBB</h2>
+
+  <fieldset>
+    <legend>After click on the icon</legend>
+    <label><input type="radio" name="mode" value="clipboard"> Just take a screenshot (image goes to clipboard)</label>
+    <label><input type="radio" name="mode" value="imgbb"> Upload to imgbb (link is copied to clipboard)</label>
+  </fieldset>
+
+  <fieldset id="imgbbBox">
+    <legend>imgbb settings (clipboard mode ignores file names)</legend>
+    <label><input type="checkbox" id="convert"> Convert PNG before upload</label>
+    <label>Format:
+      <select id="format">
+        <option value="image/webp">WebP</option>
+        <option value="image/jpeg">JPEG</option>
+      </select>
+    </label>
+    <label>Quality:
+      <select id="quality">
+        <option value="0.5">50%</option>
+        <option value="0.6">60%</option>
+        <option value="0.7">70%</option>
+        <option value="0.8">80%</option>
+        <option value="0.9">90%</option>
+        <option value="0.95">95%</option>
+      </select>
+    </label>
+    <label>Auto delete:
+      <select id="expiration">
+        <option value="0">Don't auto delete</option>
+        <option value="300">After 5 minutes</option>
+        <option value="900">After 15 minutes</option>
+        <option value="1800">After 30 minutes</option>
+        <option value="3600">After 1 hour</option>
+        <option value="10800">After 3 hours</option>
+        <option value="21600">After 6 hours</option>
+        <option value="43200">After 12 hours</option>
+        <option value="86400">After 1 day</option>
+        <option value="172800">After 2 days</option>
+        <option value="259200">After 3 days</option>
+        <option value="345600">After 4 days</option>
+        <option value="432000">After 5 days</option>
+        <option value="518400">After 6 days</option>
+        <option value="604800">After 1 week</option>
+        <option value="1209600">After 2 weeks</option>
+        <option value="1814400">After 3 weeks</option>
+        <option value="2592000">After 1 month</option>
+        <option value="5184000">After 2 months</option>
+        <option value="7776000">After 3 months</option>
+        <option value="10368000">After 4 months</option>
+        <option value="12960000">After 5 months</option>
+        <option value="15552000">After 6 months</option>
+      </select>
+    </label>
+    <label>File name:
+      <select id="namePreset"></select>
+    </label>
+    <label>Template:
+      <input type="text" id="nameTemplate" autocomplete="off">
+    </label>
+    <label><input type="checkbox" id="utc"> Use UTC time instead of local</label>
+    <div>Result: <b id="preview"></b></div>
+    <details>
+      <summary>Template tokens</summary>
+      <div style="font-size:12px; line-height:1.5">
+        {YYYY} {YY} {MM} {DD} {hh} {mm} {ss} {ms} - date and time parts<br>
+        {unix} - unix time in seconds, {unixms} - in milliseconds<br>
+        {n} {n3} {n5} - counter (1, 001, 00001), grows with every upload<br>
+        {rand} - 6 random chars, {rand12} - 12, {uuid} - random UUID<br>
+        Any other text is kept as is. Extension is added automatically.
+      </div>
+    </details>
+    <label>API key (https://api.imgbb.com/):
+      <input type="text" id="apiKey" autocomplete="off">
+    </label>
+  </fieldset>
+
+  <div id="msg" style="margin-top:10px; height:1.2em;"></div>
+  <script src="naming.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
